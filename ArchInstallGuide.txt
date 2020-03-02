@@ -59,12 +59,14 @@ passwd
 #config your linux boot loader with grub
 #install os-probe in order to detect other operating system
 pacman -S grub efibootmgr os-prober
+
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+
 #generate /boot/grub/grub.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
 
 #configure your network connection
-pacman -S dhcpcd wpa_supplicant dialog iwd
+pacman -S dhcpcd wpa_supplicant dialog iw netctl
 
 umount -R /mnt
 reboot
