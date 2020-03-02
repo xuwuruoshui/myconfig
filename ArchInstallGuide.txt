@@ -87,10 +87,11 @@ sudo pacman -S vim
 sudo pacman -S xorg xorg-xinit
 sudo pacman -S plasma-meta plasma-wayland-session 
 
-#add some configuration
-#vim .xinitrc
-#exec startplasma-x11
-~/.bash_profile
+#add the configurations of starting up the kde 
+vim .xinitrc
+exec startplasma-x11
+startx
+#After the computer starts,add the following configurations to ~/.bash_profile
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
