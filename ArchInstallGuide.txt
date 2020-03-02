@@ -97,3 +97,11 @@ startx
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
+# sddm will manage your login'view
+/etc/sddm.conf.d/kde_settings.conf
+[Autologin]
+Relogin=true
+Session=plasma.desktop
+User=xuwuruoshui
+
+systemctl enable sddm
