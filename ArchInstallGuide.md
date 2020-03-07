@@ -172,7 +172,21 @@ systemctl start bluetooth
 
 #mount ntfs
 ntfs-3g  gvfs-mtp
+
+# hibernate
+#append resume=UUID=xxx,xxx is your swap's UUID,you can use 'sudo blkid' to see your uuid
+vim /etc/default/grub
+---
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=enable resume=UUID=ada344b4-7158-4858-9778-07ba0dcbcf3e"
 ```
+# update grub
+grub-mkconfig -o /boot/grub/grub.cfg
+# edit /etc/mkinitcpio.conf,and add 'resume' in HOOKS
+vim /etc/mkinitcpio.conf
+HOOKS="base udev resume autodetect modconf block filesystems keyboard fsck"
+# generate initramfs' image
+mkinitcpio -p linux
+
 # 2. Software Install
 
 # 2.1 Repository Config
