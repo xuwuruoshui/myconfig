@@ -1,4 +1,5 @@
 # 1. Arch Install Guide
+## 1.1 System Install
 ```shell
 #connect wifi
 wifi-menu
@@ -13,7 +14,7 @@ ls /sys/fireware/efi/efivars
 fdisk -l
 cfdisk
 
-#format your partition in diffirent type
+#format your partition
 #fat32
 mkfs.fat -F32 /dev/sda1
 #ext4
@@ -33,28 +34,27 @@ mount /dev/sda1 /mnt/efi
 #change mirror in order to download package quickly
 vim /etc/pacman.d/mirrorlist
 
-#install some base package
+#install the base package
 pacstrap /mnt base linux linux-firmware
 
 #write the information of partition to fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-#you can check your fstab
+#check your fstab
 less /mnt/etc/fstab
 
 #go into /mnt
 arch-chroot /mnt
 
 #change system's zoneinfo
-ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc
 
 #in order to conveniently edit following configuration,
-#we need to download vim or nano etc
 pacman -S vim nano
 
 #change local.gen unmark the following configuration.
-#I choose the configuration of China, according to your own situation
+#according to your own situation
 vim /etc/locale.gen
 ---
 en_US.UTF-8 UTF-8
@@ -67,21 +67,23 @@ locale.gen
 vim /etc/locale.conf
 ---
 LANG=en_US.UTF-8
+LANG=zh_CN.UTF-8
 ---
 
-#write your hostname
+#hostname
 vim /etc/hostname
-
 ---
 xuwuruoshui
 ---
 
-#write your hosts
-/etc/hosts
+#hosts
+vim /etc/hosts
+
+---
 127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	yourhostname.localdomain	yourhostname
-
+---
 #config your password
 passwd
 
@@ -95,7 +97,7 @@ grub-install --target=x86_64-efi --efi-directory=/efi/boot --bootloader-id=GRUB
 #generate /boot/grub/grub.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
 
-#configure your network connection
+#add some net's tools
 pacman -S dhcpcd wpa_supplicant dialog iw netctl
 
 #sign out chroot
@@ -117,15 +119,58 @@ export EDITOR=vim
 visudo
 ---
 %sudo All=(ALL) All
-you also can install vi
 ---
 #logout
 exit
 
 #login your new user
-sudo pacman -S vim
+```
+## 1.2 Drive
+```
+#Touch Pad
+xf86-input-libinput xf86-input-synaptics 
+
+#normal gpu driver
+xf86-video-vesa
+
+#intel
+xf86-video-intel
+
+#nvidia
+nvidia nvidia-lts nvidia-utils
+
+#bluetooth
+bluez
+bluez-utils
+
+#scan bluetooth which is alive
+modinfo btusb
+systemctl enable bluetooth
+systemctl start bluetooth
+
+#mount ntfs
+ntfs-3g  gvfs-mtp
+
+# hibernate
+#append resume=uuid=xxx,xxx is your swap's uuid,you can use 'sudo blkid' to see your uuid
+vim /etc/default/grub
+---
+grub_cmdline_linux_default="quiet intel_pstate=enable resume=uuid=ada344b4-7158-4858-9778-07ba0dcbcf3e"
+
+# update grub
+grub-mkconfig -o /boot/grub/grub.cfg
+# edit /etc/mkinitcpio.conf,and add 'resume' in hooks
+vim /etc/mkinitcpio.conf
+hooks="base udev resume autodetect modconf block filesystems keyboard fsck"
+# generate initramfs' image
+mkinitcpio -p linux
+
+```
+
+## 1.3 KDE Desktop
+```
 sudo pacman -S xorg xorg-xinit
-sudo pacman -S plasma-meta plasma-wayland-session 
+sudo pacman -S plasma-meta plasma-desktop dolpin krunner partitionmanager konsole ksysguard
 
 #add the configurations of starting up the kde 
 vim .xinitrc
@@ -143,53 +188,49 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
 fi
 ---
 
-# sddm will manage your login'view
-vim /etc/sddm.conf.d/kde_settings.conf
-
----
-[Autologin]
-Relogin=true
-Session=plasma.desktop
-User=xuwuruoshui
----
 
 #network with gui
-systemctl enable NetworkManager
-systemctl start NetworkManager
+systemctl enable networkmanager
+systemctl start networkmanager
 
 #login with gui
 systemctl enable sddm
 systemctl start sddm
 
-#bluetooth
-bluez
-bluez-utils
 
-#scan bluetooth which is alive
-modinfo btusb
-systemctl enable bluetooth
-systemctl start bluetooth
+# sddm will manage your login'view,if you want to let the user login automatically,config it
+vim /etc/sddm.conf.d/kde_settings.conf
 
-#mount ntfs
-ntfs-3g  gvfs-mtp
-
-# hibernate
-#append resume=UUID=xxx,xxx is your swap's UUID,you can use 'sudo blkid' to see your uuid
-vim /etc/default/grub
 ---
-GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=enable resume=UUID=ada344b4-7158-4858-9778-07ba0dcbcf3e"
+[autologin]
+relogin=true
+session=plasma.desktop
+user=xuwuruoshui
+---
 ```
-# update grub
-grub-mkconfig -o /boot/grub/grub.cfg
-# edit /etc/mkinitcpio.conf,and add 'resume' in HOOKS
-vim /etc/mkinitcpio.conf
-HOOKS="base udev resume autodetect modconf block filesystems keyboard fsck"
-# generate initramfs' image
-mkinitcpio -p linux
+# 1.4 Deepin
+```
+#add xorg
+sudo pacman -S xorg  xorg-xinit  lightdm
+
+#set session
+vim /etc/lightdm/lightdm.conf
+------------------------
+greeter-session=lightdm-deepin-greeter  
+------------------------
+
+vim ~/.xinitrc
+--------------
+exec startdde 
+--------------
+
+systemctl enable lightdm            
+systemctl start lightdm     # 开启桌面 
+```
 
 # 2. Software Install
 
-# 2.1 Repository Config
+## 2.1 Repository Config
 ```shell
 #mirror
 sudo vim /etc/pacman.d/mirrorlist
@@ -209,7 +250,7 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 sudo pacman -Syy
 sudo pacman -S archlinux-keyring
 ```
-# 2. Normal Software
+## 2.2 Normal Software
 
 ```shell
 # bash自动补全
@@ -340,7 +381,7 @@ systemctl start redis
 redis-cli
 ```
 
-# 3. Normal Commond
+# 2.3 Normal Commond
 ```shell
 # clean the unuseful package
 sudo pacman -R $(pacman -Qdtq)
