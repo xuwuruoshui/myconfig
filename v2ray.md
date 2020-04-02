@@ -5,14 +5,10 @@
 添加txt。txt记录，记录值
 
 ## 2. tls
-1. https://freessl.cn/orderlist获取tls
-2. 获取txt记录，记录值。点测试有两个通过就可以用。
-3. 下载私钥，创建一个域名+`.key`的文件
-4. https://www.myssl.cn/tools/merge-pem-cert.html
-   - 勾选PEM
-   - 将私钥复制上去
-   - 勾选自动添加中间证书,生成`pem`文件
-   - 将其名字改为域名+`.`
+1. https://freessl.cn/orderlist 获取tls
+2. 获取txt记录，记录值。点测试有两个通过就可以用
+3. 返回之前的页面点击验证.验证成功后下载文件(私钥和pem证书)
+4. 修改私钥和公钥的名字为域名地址（例如baidu.com.key baidu.com.pem)
 5. 在`/etc/`下创建域名的文件夹, 将配置文件上传到该文件夹中.
 
 ## 3. bbr
