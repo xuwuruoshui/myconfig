@@ -68,6 +68,11 @@ git push origin -u new-name
 #merge the branch
 #Now,if you are on the master branch, you want to merge the branch into the current branch
 
+#fetch all remote branch to local branch
+git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+git fetch --all
+git pull --all
+
 git merge branch-name
 ```
 
