@@ -109,6 +109,9 @@ set foldmethod=manual
 set background=dark
 colorscheme hybrid
 
+"set unix
+set ff=unix
+
 
 """"""""""""""""""""""""
 """"Keyboard Setting""""
