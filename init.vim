@@ -85,7 +85,6 @@ Plug 'lfv89/vim-interestingwords'
 "Vue
 "Plug  'posva/vim-vue'
 
-
 call plug#end()
 
 
