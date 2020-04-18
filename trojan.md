@@ -35,8 +35,8 @@ unzip web.zip
 systemctl restart nginx.service
 ```
 >I just created an html page and got nothing,the following configures are others
->test
-access your <https://www.yourdomian.xxx>
+
+>test access your <https://www.yourdomian.xxx>
 
 # 2. trojan 
 1. server
