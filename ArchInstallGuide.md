@@ -77,6 +77,7 @@ xuwuruoshui
 ---
 
 #hosts
+#If the system has a permanent IP address, it should be used instead of 127.0.1.1.
 vim /etc/hosts
 
 ---
