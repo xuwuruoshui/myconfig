@@ -380,6 +380,20 @@ mongo
 redis
 systemctl start redis
 redis-cli
+
+#wine
+#add multilib mirror
+vim /etc/pacman.conf
+----------
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+----------
+#supported i386
+vim ~/.zshrc
+----------
+export WINEPREFIX=$HOME/.config/wine/
+export WINEARCH=win32
+----------
 ```
 
 # 2.3 Normal Commond
