@@ -153,7 +153,7 @@ iabbrev @@ 1085252985@qq.com
 """Plugin Setting"""
 """"""""""""""""""""
 " Markdown Preview
-let g:mkdp_browser = 'google-chrome-stable'
+"let g:mkdp_browser = 'google-chrome-stable'
 
 
 " Nerdtree

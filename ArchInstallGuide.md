@@ -152,6 +152,11 @@ systemctl start bluetooth
 #mount ntfs
 ntfs-3g  gvfs-mtp
 
+#phone
+android-sdk-platform-tools
+mtpfs(maybe)
+gvfs(maybe)
+
 # hibernate
 #append resume=uuid=xxx,xxx is your swap's uuid,you can use 'sudo blkid' to see your uuid
 vim /etc/default/grub
@@ -394,8 +399,9 @@ vim ~/.zshrc
 export WINEPREFIX=$HOME/.config/wine/
 export WINEARCH=win32
 ----------
+#add gpu lib
+lib32-nvidia-libgl
 ```
-
 # 2.3 Normal Commond
 ```shell
 # clean the unuseful package
