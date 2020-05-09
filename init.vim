@@ -111,6 +111,12 @@ colorscheme hybrid
 "set unix
 set ff=unix
 
+"table 4
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+set autoindent
 
 """"""""""""""""""""""""
 """"Keyboard Setting""""
