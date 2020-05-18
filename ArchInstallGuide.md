@@ -157,6 +157,9 @@ android-sdk-platform-tools
 mtpfs(maybe)
 gvfs(maybe)
 
+#phone' view in pc
+scrcpy
+
 # hibernate
 #append resume=uuid=xxx,xxx is your swap's uuid,you can use 'sudo blkid' to see your uuid
 vim /etc/default/grub
