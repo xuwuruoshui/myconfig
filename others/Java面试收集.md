@@ -60,6 +60,30 @@
 # 微服务
 
 # 数据库
+## MYSQL
+>数据量很大,分页查询慢,如何优化?
+当limit的偏移量(即第一个参数)特别大时查询速度 
+1. 子查询
+```sql
+select * from orders_history where type=8 and
+id>=(select id from orders_history where type=8 limit 100000,1)
+limit 100;
+```
+2. id限定优化
+```sql
+select * from orders_history where type=2
+and id between 1000000 and 1000100 limit 100;
+```
+```sql
+select * from orders_history where id >= 1000001 limit 100;
+```
+3. in
+```sql
+select * from orders_history where id in
+(select order_id from trade_2 where goods = 'pen')
+limit 100;
+```
+## Oracle
 
 # Linux
 
