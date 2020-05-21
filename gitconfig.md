@@ -22,7 +22,9 @@ git add xxx
 git commit xxx -m "description"
 
 # back to last step
-git reset xxx
+git reset --soft commit-id
+git reset --mixed commit-id
+git reset --hard commit-id
 
 # if you first push,you need to use it
 git push -u m78 master
