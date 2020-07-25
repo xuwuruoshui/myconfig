@@ -83,6 +83,10 @@ select * from orders_history where id in
 (select order_id from trade_2 where goods = 'pen')
 limit 100;
 ```
+> 乐观锁和悲观锁
+
+乐观锁，当数据要改变的时候需要判断当前version是否符合规定，当数据修改成功后修改版本的version。比如两条sql同时执行，第一条先完成了修改，version也随之改变，那第二条拿到的version就无效了，sql执行并没有意义
+
 ## Oracle
 
 # Linux

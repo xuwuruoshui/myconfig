@@ -50,11 +50,11 @@ Plug 'junegunn/fzf.vim'
 "search and replace,you can try :Far A B
 Plug 'brooth/far.vim'
 
-"Goland
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 "Python
-"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 "easy to read code,you need to 'pacman ctags' lib
 "Plug 'majutsushi/tagbar'
