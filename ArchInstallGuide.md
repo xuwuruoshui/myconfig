@@ -328,6 +328,9 @@ net-tools
 #更新grub(yay)
 update-grub
 
+#看文档的工具
+xchm
+
 # u盘刻录工具
 etcher
 
