@@ -197,6 +197,28 @@ AtomicStampedReference compareAndSet(当前值,新值,当前版本,新版本)
 
 获取到第一把锁，自动获取到里面的第二把锁,后面来的B线程只有等待A线程执行完成。
 
+> 线程优先级setPriority
+
+Thread.MIN_PRIORITY 1
+
+Thread.MAX_PRIORITY 10
+
+Thread.NORM_PRIORITY 5
+
+优先级越大，抢占cpu资源更快，当然也可能抢不到
+
+> join插队
+
+指定一个线程B，抢占当前线程A，线程A一直等待直到线程B完成。如果join设置了时间就超时等待。
+
+> yield礼让
+
+把正在运行的线程变为就绪的线程，之后能不能抢到cpu资源看运气了。
+
+> 守护线程
+
+线程分为用户线程和守护线程，虚拟机必须确保用户线程执行完毕，虚拟机不用等待守护线程(gcw)完毕
+
 ## 反射
 
 ##  JVM
