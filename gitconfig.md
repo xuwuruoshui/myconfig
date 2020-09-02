@@ -28,6 +28,9 @@ git rm xxx
 # make the file be untracked
 git rm --cached xxxx
 
+# rename file
+git mv xxx xxxx
+
 # back to last step
 git reset --soft commit-id
 git reset --mixed commit-id
