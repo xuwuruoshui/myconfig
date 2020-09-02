@@ -31,6 +31,9 @@ git rm --cached xxxx
 # rename file
 git mv xxx xxxx
 
+# log,-p to see diff
+git log -p
+
 # back to last step
 git reset --soft commit-id
 git reset --mixed commit-id
@@ -87,4 +90,3 @@ git pull --all
 
 git merge branch-name
 ```
-
