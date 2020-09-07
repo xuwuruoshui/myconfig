@@ -9,6 +9,8 @@ git config --global credential.helper store
 ```shell
 # add m78
 git remote add m78 https://xxx.git
+# rename
+git remote rename xxx xxxx
 # list remote repository's name
 git remote
 # delete origin
@@ -34,10 +36,15 @@ git mv xxx xxxx
 # log,-p to see diff
 git log -p
 
-# back to last step
-git reset --soft commit-id
-git reset --mixed commit-id
-git reset --hard commit-id
+#list Annotated Tags
+git tag
+# create Lightweight Tags
+git tag -a version -m "descript"
+# create
+git tag version 
+
+# back to last step(stage area)
+git reset HEAD xxx
 
 # if you first push,you need to use it
 git push -u m78 master
