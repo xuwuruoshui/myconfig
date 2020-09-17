@@ -18,14 +18,17 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
 
 "add hybrid colorscheme
-Plug 'w0ng/vim-hybrid'
+"Plug 'w0ng/vim-hybrid'
+"One Dark主题
+Plug 'joshdick/onedark.vim'
 " Initialize plugin system
+
 
 "folder and file's view
 Plug 'scrooloose/nerdtree'
 "add notes
 Plug 'preservim/nerdcommenter'
-"add icons
+"nerdtree图标
 Plug 'ryanoasis/vim-devicons'
 "git notification
 Plug 'xuyuanp/nerdtree-git-plugin'
@@ -104,9 +107,9 @@ set hlsearch
 "folding code,you can use zc or zo
 set foldmethod=manual
 
-"set colorscheme
-set background=dark
-colorscheme hybrid
+"配置主题
+"set background=dark
+colorscheme onedark
 
 "set unix
 set ff=unix
@@ -124,15 +127,18 @@ set autoindent
 let mapleader=","
 let maplocalleader=","
 
-"save, use ,+w
+"保存
 inoremap <leader>w <Esc>:w<cr>
 
-"insert mode to normal mode,you can use jj
-inoremap jj <Esc>`^
+"切换为Normal模式
+inoremap jj <Esc>
 
-"copy/paste
+"粘贴/赋值
 noremap <leader>c "+y
 noremap <leader>v "+p
+
+"删除
+inoremap <c-d> <Esc>ddi
 
 "split screen,you can use ctrl+h/j/k/l
 noremap <C-h> <C-w>h
@@ -147,12 +153,29 @@ com! FormatJSON %!python3 -m json.tool
 "sudo option
 cnoremap w!! w !sudo tee % >/dev/null
 
-"correct tyops
-iabbrev waht what
-iabbrev tehn then
 
 "email
 iabbrev @@ 1085252985@qq.com
+iabbrev ssig --<cr>name: xuwuruoshui<cr>email: 1085252985@qq.com
+
+"autocmd
+augroup testgroup
+    autocmd!
+    autocmd FileType html setlocal number
+augroup END
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap in) :<c-u>normal! f)vi)<cr>
+onoremap in< :<c-u>normal! f<vi<<cr>
+onoremap in> :<c-u>normal! f>vi><cr>
+onoremap in' :<c-u>normal! f'vi'<cr>
+onoremap in" :<c-u>normal! f"vi"<cr>
+onoremap in` :<c-u>normal! f`vi`<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap in} :<c-u>normal! f}vi}<cr>
+onoremap in[ :<c-u>normal! f[vi[<cr>
+onoremap in] :<c-u>normal! f]vi]<cr>
+
+
 
 
 """"""""""""""""""""
