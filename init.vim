@@ -1,4 +1,3 @@
-
 """""""""""""""""""""
 "      Plugins      "
 """""""""""""""""""""
@@ -26,7 +25,7 @@ Plug 'joshdick/onedark.vim'
 
 "folder and file's view
 Plug 'scrooloose/nerdtree'
-"add notes
+"注释
 Plug 'preservim/nerdcommenter'
 "nerdtree图标
 Plug 'ryanoasis/vim-devicons'
@@ -91,9 +90,9 @@ Plug 'lfv89/vim-interestingwords'
 call plug#end()
 
 
-""""""""""""""""""""
-"""""Format Font""""
-""""""""""""""""""""
+"""""""""""""""""""
+""""Format Font""""
+"""""""""""""""""""
 
 "Code highlighting
 syntax on
@@ -120,12 +119,14 @@ set softtabstop=4
 set tabstop=4
 set expandtab
 set autoindent
+set textwidth=80
 
 """"""""""""""""""""""""
 """"Keyboard Setting""""
 """"""""""""""""""""""""
 let mapleader=","
 let maplocalleader=","
+
 
 "保存
 inoremap <leader>w <Esc>:w<cr>
@@ -140,6 +141,8 @@ noremap <leader>v "+p
 "删除
 inoremap <c-d> <Esc>ddi
 
+"查找
+nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
 "split screen,you can use ctrl+h/j/k/l
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
@@ -158,11 +161,17 @@ cnoremap w!! w !sudo tee % >/dev/null
 iabbrev @@ 1085252985@qq.com
 iabbrev ssig --<cr>name: xuwuruoshui<cr>email: 1085252985@qq.com
 
-"autocmd
-augroup testgroup
+"""""""""
+"autocmd"
+"""""""""
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
     autocmd!
-    autocmd FileType html setlocal number
+    autocmd FileType vim setlocal foldmethod=marker
 augroup END
+" }}}
+
+
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap in) :<c-u>normal! f)vi)<cr>
 onoremap in< :<c-u>normal! f<vi<<cr>
