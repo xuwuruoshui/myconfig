@@ -476,3 +476,22 @@ sudo pacman -Scc
 sudo journalctl --vacuum-size=50M
 ```
 
+# 4 Fix System
+```shell
+# view partition disk
+fdisk -l
+
+# mount dir
+mount /dev/sda* /mnt
+arch-chroot /mnt
+
+# reinstall grub,'/boot' depend your own partition disk
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
+--recheck
+
+# generate config file
+grub-mkconfig -o /boot/grub/grub.cfg
+# final
+exit
+umount -R /mnt
+```
