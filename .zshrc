@@ -9,8 +9,16 @@ PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export GEM_HOME=$HOME/.gem
 #add theme
 source $(dirname $(gem which colorls))/tab_complete.sh
-alias co='colorls'
 alias cl='clear'
+alias co='colorls'
+alias c='colorls -l' 
+alias ca='colorls -a'
+alias ra='ranger'
+alias vi='nvim'
+alias vim='nvim'
+alias tn='tmux new -s'
+alias wine='env LANG=zh_CN.UTF-8 wine'
+alias neofetch='neofetch | lolcat'
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
