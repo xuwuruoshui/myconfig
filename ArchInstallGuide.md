@@ -263,7 +263,6 @@ sudo pacman -Syy
 sudo pacman -S archlinux-keyring
 ```
 ## 2.2 Normal Software
-
 ```shell
 # 降级软件包
 downgrade
@@ -281,6 +280,9 @@ sudo modprobe -a vboxdrv
 
 # 显卡切换
 optimus-manager
+
+# 修改分区
+gparted
 
 # 字体
 ttf-roboto noto-fonts ttf-dejavu
