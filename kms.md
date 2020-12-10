@@ -5,11 +5,11 @@
 # 2、激活windows
 1. 卸载已有激活key
 ```shell
-slmgr.vbs -upk 
+cscript slmgr.vbs -upk 
 ```
 2. 安装新的GVLK
 ```shell
-slmgr.vbs -ipk 33PXH-7Y6KF-2VJC9-XBBR8-HVTHH
+cscript slmgr.vbs -ipk 33PXH-7Y6KF-2VJC9-XBBR8-HVTHH
 ```
 - Windows 7 专业版：FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4
 - Windows 8 专业版：NG4HW-VH26C-733KW-K6F98-J8CK4
@@ -18,15 +18,15 @@ slmgr.vbs -ipk 33PXH-7Y6KF-2VJC9-XBBR8-HVTHH
 - [more](https://github.com/Wind4/vlmcsd/tree/gh-pages)
 3. 填写KMS服务器域名或者IP地址（会默认1688端口激活）
 ```shell
-slmgr.vbs -skms 192.168.0.108
+cscript slmgr.vbs -skms 192.168.0.108
 ```
 4. 尝试连接KMS服务器在线激活（attempt online）
 ```shell
-slmgr.vbs -ato 
+cscript slmgr.vbs -ato 
 ```
 5. 显示激活信息
 ```shell
-slmgr.vbs -dlv
+cscript slmgr.vbs -dlv
 ```
 
 # 3、激活office
