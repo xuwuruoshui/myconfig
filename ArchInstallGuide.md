@@ -446,6 +446,12 @@ export WINEARCH=win32
 # add gpu lib
 lib32-nvidia-libgl
 
+# grub theme
+git clone https://github.com/vinceliuice/grub2-themes.git
+
+cd grub2-themes
+
+sudo ./install.sh -b -t tela
 
 ```
 ##  2.3 other software
