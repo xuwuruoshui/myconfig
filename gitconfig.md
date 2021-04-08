@@ -44,7 +44,11 @@ git tag -a version -m "descript"
 git tag version 
 
 # back to last step(stage area)
-git reset HEAD xxx
+# https://www.jianshu.com/p/199f584e5c50
+git log
+git reset --soft/mixed/hard id
+# if you had pushed,you need
+git revert id
 
 # if you first push,you need to use it
 git push -u m78 master
