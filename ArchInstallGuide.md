@@ -284,6 +284,12 @@ optimus-manager
 # 修改分区
 gparted
 
+# 后台运行
+screen
+-S name 开会话
+-r name 进入会话
+ctrl+a d 脱离会话
+
 # 字体
 ttf-roboto noto-fonts ttf-dejavu
 
