@@ -223,6 +223,9 @@ finalize方法完毕后,GC会再次判断该对象是否可达,若不可达,则�
 
 
 ## 线程
+
+
+
 ### 进程和线程
 
 进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其他进程产生影响。
@@ -347,7 +350,37 @@ Thread.NORM_PRIORITY 5
 
 获取到第一把锁，自动获取到里面的第二把锁,后面来的B线程只有等待A线程执行完成。
 
-## 反射
+### ThreadLocal
+
+Thread对象都拥有一个ThreadLocalMap，它存储线程中所有ThreadLocal对象及其对应的值。
+
+ThreadLocalMap是一个Map结构，key为ThreadLocal，value为线程变量。
+
+线程安全，每条线程各不影响。
+
+ThreadLocal内存泄露：不再使用的对象无法被回收，即内存泄露。
+
+强引用：最普遍的new，不会被垃圾回收器回收，内存不足直接抛出OOM
+
+弱引用：JVM垃圾回收时，无聊内存是否充足都会被弱引用关联对象，用java.lang.ref.WeakReference类来表示。
+
+ThreadLocalMap的Key就是弱引用，Value为强引用，key会被垃圾回收回收也能手动回收，回收后就变为null，下次调用set()、get()、remove()方法就会清除Value值。
+
+使用方法：
+
+每次使用完了就调用remove方法。
+
+使用**private static**修饰，使ThreadLocal强引用(贯穿于controller service dao层，不被回收)，同时保证通过弱引用key访问到ThreadLocalMap的value。
+
+### 并发
+
+原子性
+
+可见性
+
+有序性
+
+## .反射
 
 ##  JVM
 
