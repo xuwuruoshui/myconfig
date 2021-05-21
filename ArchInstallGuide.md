@@ -511,4 +511,7 @@ umount -R /mnt
 
 # other error,example some software has errors
 pacman -Qo software's name/dependency
+
+# only download dependcies
+pacman -Syuw
 ```
