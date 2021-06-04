@@ -255,6 +255,13 @@ TERMINATED: 终止
 1. CPU密集型, 几核,就是几，可以保持CPU效率最高
 2. IO密集型 判断程序中十分耗IO的线程
 
+### 线程池执行流程
+
+1. 核心线程数是否满了。没有满就继续创建线程。
+2. 任务队列是否满了。没有就添加到队列。
+3. 最大线程数是否满了。没有就创建线程。
+4. 都满了就抛弃任务。超过核心线程的空闲线程，会根据过期时间回收。
+
 ### 关键字
 
 #### wait/sleep的区别
@@ -425,8 +432,19 @@ hashcode()实际返回一个整数，为了确定在hash表中的索引位置，
 
 # 数据库
 ## MYSQL
->数据量很大,分页查询慢,如何优化?
+
+### 三范式
+
+第一范式： 列不可再分割
+
+第二范式：满足第一范式，一个表做一件事，有主键区分
+
+第三范式：满足第二范式，表中不能有其他表的字段(冗余字段)
+
+### 数据量很大,分页查询慢,如何优化?
+
 当limit的偏移量(即第一个参数)特别大时查询速度 
+
 1. 子查询
 ```sql
 select * from orders_history where type=8 and
@@ -447,13 +465,13 @@ select * from orders_history where id in
 (select order_id from trade_2 where goods = 'pen')
 limit 100;
 ```
-> 乐观锁和悲观锁
+### 乐观锁和悲观锁
 
 乐观锁，当数据要改变的时候需要判断当前version是否符合规定，当数据修改成功后修改版本的version。比如两条sql同时执行，第一条先完成了修改，version也随之改变，那第二条拿到的version就无效了，sql执行并没有意义
 
 
 
-> MySQL底层
+### MySQL底层
 
 - 采用B+Tree，非叶子节点不存储数据，只存储索引。
 
@@ -467,12 +485,14 @@ B+Tree,就拿bigint(8字节来算)来存储。
 - 叶子节点，假如一个索引和一条数据的空间为1KB，那么起码一个节点就可以存16条数据。
 - 那么如果树的高度为3,1170*1170*16 = 2000多万
 
-> MySQL数据存放路径
+### MySQL数据存放路径
+
 `show variable like '%dir%'`
 Windows放在data下
 Linux放在/var/lib/mysql
 
-> MySQL数据文件的含义
+### MySQL数据文件的含义
+
 *MyISAM*
 .frm 表结构,字段长度
 .MYD 数据信息文件,存储数据信息
@@ -485,46 +505,59 @@ Linux放在/var/lib/mysql
 .part(分区存储) 用于存储分区信息
 聚集索引,叶子节点存数据
 
-> MyISAM和InnoDB之间的区别
+### MyISAM和InnoDB之间的区别
+
 MyISAM：不支持事务，锁表,非聚合索引，查询比较快
 InnoDB：支持事务，必须有主键
 MEMORY：数据放内存，默认使用哈希索引
 
-> InnoDB为什么必须有主键？推荐用主键自增？
+### InnoDB为什么必须有主键？推荐用主键自增？
+
 InnoDB底层B+Tree就是用主键来维护表中所有的数据。如果自己不设置，InnoDB会自动选一个字段内容不重复的设置为主键，没有那就系统自己建一个字段
 
-> B+Tree和Hash
+### B+Tree和Hash
+
 大部分情况下都用B+Tree,如果单查某个精确的值还hash远大于B+Tree,只需要对索引做一次hash就可以获取到地址，但是如果查询范围Hash就不行了,MySQL中的B+Tree存储数据的节点都会有双向指针。
 
-> 数据库三范式
+### 数据库三范式
+
 第一范式：每列不能再分为最小的数据单元
 第二范式：满足第一范式，每张表只描述一件事情
 第三范式：表中的列不存在对非主键列的传递依赖。比如A表中出现了B表中的一个非主键字段
 
-> 数据库事务(ACID)
+### 数据库事务(ACID)
+
 原子性：事物是一个完整的操作。要么都执行，要么都失败。
 一致性：当事物完成时，数据必须处于一致状态。(比如转账前后，总数是不变的)
 隔离性：数据进行修改的所有并发事物是彼此隔离的。一个事务无法影响另一个事务
 持久性：事务完成后，持久到硬盘
 
-> 事务隔离级别
+### 事务隔离级别
+
 read uncommited: 未提交读 读到了没有提交的数据(脏读)
 read commited: 不可重复读 提交前读到的数据,和提交后的读到的数据不同(更新)(幻读)
 repeatable read: 可重读 查询前的数据结果数和查询后数据结果数变了(插入 删除)(幻读)
 serializable: 串行化 锁表
 
-> MySQL当记录不存在时inserrt,当记录存在时update，语句怎么写
+### MySQL当记录不存在时inserrt,当记录存在时update，语句怎么写
+
 insert into interview (id,name,age) values(3,"yyyy",13)
 on duplicate key update name ='hahaha',age = 15;
 
->查看为表格定义的索引
+### 查看为表格定义的索引
+
 show index from tablename
 
->LIKE 声明中的%和_是什么意思?
+### LIKE 声明中的%和_是什么意思?
+
 模糊查询,%匹配多个字符，_匹配一个字符(只匹配一个字符).%和_在之前是索引不生效
 
->char和varchar区别
+### char和varchar区别
+
 char固定长度不变,比如char(10)和varchar(10),如果存储'abc'，那么用char长度还是10,varchar则是3。char比varchar存取数据要快。char存储时英文字符占一个字节,中文2个字节,varchar中英文都是2个
+
+
+
 ## Oracle
 
 # Linux
