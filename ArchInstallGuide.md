@@ -97,6 +97,10 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 #generate /boot/grub/grub.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# allow os-prober find other os
+vim /etc/default/grub
+GRUB_DISABLE_OS_PROBER=false
+
 #add some net's tools
 pacman -S dhcpcd wpa_supplicant dialog iw netctl
 
