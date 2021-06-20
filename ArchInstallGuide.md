@@ -183,7 +183,7 @@ mkinitcpio -p linux
 ```sh
 # add xorg and kde components
 sudo pacman -S xorg xorg-xinit
-sudo pacman -S plasma-meta plasma-desktop dolpin krunner partitionmanager konsole ksysguard
+sudo pacman -S plasma-meta plasma-desktop dolpin krunner partitionmanager konsole ksysguard gwenview
 
 # add the configurations of starting up the kde 
 vim .xinitrc
