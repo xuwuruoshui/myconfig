@@ -93,11 +93,16 @@ git push origin -u new-name
 
 # merge the branch
 # Now,if you are on the master branch, you want to merge the branch into the current branch
-
+git merge branch-name
+# If you want to merge a commit to master.First, get branch-name's log commitId,then switch to master,use "git cherry-pick commitId"
+git checkout branch-name
+git log
+git checkout master
+git git cherry-pick commitId
 # fetch all remote branch to local branch
 git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
 git fetch --all
 git pull --all
 
-git merge branch-name
+
 ```
