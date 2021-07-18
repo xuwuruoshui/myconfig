@@ -135,6 +135,8 @@ inoremap <leader>w <Esc>:w<cr>
 inoremap jj <Esc>
 
 "粘贴/赋值
+"vim和系统复制粘贴不能统一，就下载xclip
+set clipboard=unnamedplus
 noremap <leader>c "+y
 noremap <leader>v "+p
 
