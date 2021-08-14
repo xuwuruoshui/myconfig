@@ -137,8 +137,15 @@ inoremap jj <Esc>
 "粘贴/赋值
 "vim和系统复制粘贴不能统一，就下载xclip
 set clipboard=unnamedplus
+" linux下
 noremap <leader>c "+y
 noremap <leader>v "+p
+" windows的wsl下
+" paste.exe下载地址,https://www.c3scripts.com/tutorials/msdos/paste.zip
+" noremap <leader>c :!/mnt/c/Windows/System32/clip.exe<cr>u
+" noremap <leader>v :read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
+" noremap! <leader>v <esc>:read !/mnt/c/Windows/System32/paste.exe <cr>i<bs><esc>l
+
 
 "删除
 inoremap <c-d> <Esc>ddi
