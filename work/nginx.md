@@ -7,7 +7,7 @@
 server{ 
     # 监听端口，服务器名称
     listen       80;
-    server_name  xuwuruoshui.club;
+    server_name  xxx.com;
     client_max_body_size 1000m;
     location ^~ / {
        # 匹配到/后，代理到http://127.0.0.1:4999
@@ -30,7 +30,7 @@ server{
 # 443端口配置
 server { 
     listen       443;
-    server_name  xxx;
+    server_name  xxx.com;
     # ssh配置
     ssl on; 
     ssl_certificate /etc/nginx/ssl/test.crt;
@@ -57,8 +57,8 @@ server {
 # http跳转https	
 server{
     listen 80;
-    server_name showdoc.xuwuruoshui.club;
-    rewrite ^/(.*)$ https://showdoc.xuwuruoshui.club:443/$1 permanent;
+    server_name xxx.com;
+    rewrite ^/(.*)$ https://xxx.com:443/$1 permanent;
 }
 ```
 
