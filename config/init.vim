@@ -87,6 +87,9 @@ Plug 'lfv89/vim-interestingwords'
 "Vue
 "Plug  'posva/vim-vue'
 
+"Copilot
+Plug 'github/copilot.vim'
+
 call plug#end()
 
 
