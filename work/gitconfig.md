@@ -106,3 +106,8 @@ git pull --all
 
 
 ```
+# 4. other
+```sh
+# last commit before merging
+git log --merges -n 1
+```
